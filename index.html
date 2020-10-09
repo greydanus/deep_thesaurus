@@ -77,6 +77,7 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
                     document.getElementById('result').innerHTML = result.join(', ');
                 },
                 error: function(xhr, resp, text) {
+                    document.getElementById("result").innerHTML = "Your request failed. Check your browser console for more info.";
                     console.log(xhr, resp, text);
                 }
             })
