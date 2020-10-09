@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<!-- bootstrap -->
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="./static/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="./static/bootstrap.min.css">
+<link rel="stylesheet" href="./static/bootstrap-theme.min.css">
+
+<!--math notation-->
+<script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!-- stylesheet -->
+<link rel="stylesheet" type="text/css" href="./static/style.css">
+<!-- import ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+
+
+<h1><b>Word Wumbo</b>: a deep learning thesaurus
+<!--     <img src="/static/books.png" alt="" style="max-width: 40px"> -->
+</h1>
+<h4 style='text-align:center; font-size: 15px'>Eric Frank, Xinyu Hu, and Sam Greydanus</h4>
+<img src="./static/wumbo.jpg" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 16%; min-width: 150px; max-width: 250px;border: 1px solid #333;">
+
+<br>
+
+<div class="sechighlight">
+<div class="container sec">
+  <h2>Overview</h2>
+  <div id="coursedesc">
+    In the sentences "You are pretty great" and "You are pretty and great," the word <i>pretty</i> means different things. Even so, the average thesaurus recommends the same set of synonyms regardless of context. This is a silly. To make your life incrementally better we propose the Word Wumbo, a thesaurus which uses a deep learning model to rank synonyms using context.
+  </div>
+</div>
+</div>
+
+<div class="project_demo" style="display: block; margin-left: auto; margin-right: auto; width:600px">
+    <div style="text-align:left;">
+
+        <h4>Thesaurus demo:</h4>
+
+          <form id="form" action="" method="post">
+              <label for="sentence">Current sentence:</label>
+              <input type="text" id="sentence" name="sentence" size="50" value="You are pretty and great."><br>
+              <label for="word">Word to replace: </label>
+              <input type="text" id="word" name="word" value="pretty">
+              <input type="button" id="submit" value="Go">
+          </form>
+    </div>
+    <div style="text-align:left;">
+          <div>
+            <p id="result"></p>
+          </div>
+    </div>
+
+    <script>
+
+    $(document).ready(function(){
+        // click on button submit
+        $("#submit").on('click', function(){
+          document.getElementById("result").innerHTML = "Working...";
+          var data = {'text': $("#sentence").val(), 'word': $("#word").val()}
+          console.log(data)
+            // send ajax
+            $.ajax({
+                url: 'http://ec2-3-236-204-116.compute-1.amazonaws.com:8888', // url where to submit the request
+                type : "POST", // type of action POST || GET
+                dataType : 'json', // data type
+                data : data,
+                success : function(result) {
+                    // console.log(result);
+                    document.getElementById('result').innerHTML = result.join(', ');
+                },
+                error: function(xhr, resp, text) {
+                    console.log(xhr, resp, text);
+                }
+            })
+        });
+    });
+
+</script>
+
+</div>
+
+
+<div class="maintext">
+
+   <h3> Technical note </h3>
+
+   <p>
+       In order to fit our server in the 500 MB limit imposed by our free Heroku dyno, we are using <a href="https://huggingface.co/google/bert_uncased_L-8_H-512_A-8">Medium-BERT</a> to rank sentences. Qualitatively, we noticed that BERT and DistilBert both produce better rankings. In the future we hope to figure out how to rank with these models. Our DistilBERT server takes up 600 MB, so with a few clever tricks we may be able to get it running here soon.
+   </p>
+
+   <h3> How it works </h3>
+
+   <p>
+       We will write a more thorough explanation of our project here. In order to make ourselves seem smart, precise, and trustworthy we can use some math in our explanation. Perhaps the quadratic formula will do. It is \(ax^2 + bx + c = 0\). We could even write some pseudocode in order to seem both relatable and technically sound.
+   </p>
+
+   <div class="highlight">
+       <pre><code class="language-python" data-lang="python">
+           <span class="n">import numpy as np</span>
+           <span class="n">print("Hello world")</span>
+       </code></pre>
+   </div>
+   <p>
+       We can end our demo with some pithy comments about the structure of reality, the meaning of existence, and the dignity of the individual.
+   </p>
+</div>
+
+<div class="sechighlight">
+<div id="footer">
+Finished October 23, 2020
+</div>
+</div>
+</body>
+</html>
