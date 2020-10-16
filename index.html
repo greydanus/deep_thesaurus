@@ -98,7 +98,7 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
    </p>
 
    <div style="max-width: 80%; display: block; margin-left: auto; margin-right: auto;">
-     <img src="./static/deep-thesaurus.jpeg" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 100%; border: 1px solid #333; margin-top: 20px; margin-bottom: 20px">
+     <img src="./static/deep-thesaurus.jpeg" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 100%; margin-top: 20px; margin-bottom: 20px">
      <p><i>
       Figure 1: We use our preliminary model to rank synonyms based on context. The goal is to obtain synonyms for the word “current.” This is a challenging task because the word’s meaning differs according to the sentence it is being used in. Starting from an unordered set of 36 synonyms -- some meant to replace “current” as in “contemporary” and others meant to replace “current” as in “the flow of something” -- we substitute “current” for each synonym and then use BERT to encode the resulting sentences. Then we use the cosine similarity between those sentence vectors and the original sentence vector to rank the synonyms. Intuitively, this ranking picks out the synonyms that change the meaning of the sentence the least, which are the synonyms that are most relevant to the user.
      </i></p>
