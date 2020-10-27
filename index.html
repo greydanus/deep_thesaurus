@@ -34,24 +34,33 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 
 
 
-<h1>The Deep Thesaurus
-<!--     <img src="/static/books.png" alt="" style="max-width: 40px"> -->
-</h1>
-<h4 style='text-align:center; font-size: 15px'>By the Word Wumbo Team: Eric Frank, Xinyu Hu, and Sam Greydanus</h4>
-<img src="./static/wumbo.jpg" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 16%; min-width: 150px; max-width: 250px;border: 1px solid #333;">
+<div class="titlesec">
+  <div style="display: inline-block;">
+    <h1 style="display: inline-block;">The Deep Thesaurus</h1>
+<!--     <div style="display: inline-block;text-align:right;margin: auto;margin-left: auto;margin-right: auto;"> -->
+    <div style="text-align: left;margin-left:20px;">
+      <a href="./index.html" style="color:black">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./how.html" style="color:black">How it works</a>
+    </div>
+  </div>
+</div>
 
 <br>
 
-<div class="sechighlight" style='width:80%;display: block; margin-left: auto; margin-right: auto;'>
-<div class="container sec">
-  <h2>Overview</h2>
-  <div id="coursedesc">
-    In the sentences "You are pretty great" and "You are pretty and great," the word pretty carries different meanings. Yet most standard thesauruses neglect to model this distinction, recommending a set of synonyms for the word regardless of context. This is a poor idea. It’s also penniless. Given modern language models, we can make substantial improvements over existing thesaurus APIs by taking sentence-level context into account. In particular, this can be done by using a natural language deep learning model (e.g. BERT [1], CTRL [2], or GPT-3 [3]) to <i>rank synonyms based on their context</i>.
+<div class="overviewsec">
+  <h3>Overview</h3>
+  <div id="overview">
+    <p>
+      In the sentences "You are pretty great" and "You are pretty and great," the word <i>pretty</i> carries different meanings. Yet most standard thesauruses neglect to model this distinction, recommending a set of synonyms for the word regardless of context. This is a poor idea. It’s also penniless. Given modern language models, we can make substantial improvements over existing thesaurus APIs by taking sentence-level context into account. In particular, this can be done by using a natural language deep learning model such as BERT or GPT-3 to <i>rank synonyms based on their context</i>.
+    </p>
   </div>
 </div>
-</div>
 
-<div class="project_demo" style="display: block; margin-left: auto; margin-right: auto; width:600px">
+<div class="overviewsec">
+<h3>Try it out</h3>
+  <p>
+    Use your word in a sentence and hit "go."
+  </p>
+<div class="demo">
     <div style="text-align:left;">
 
         <!-- <h4>Thesaurus demo:</h4> -->
@@ -99,35 +108,33 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
 </div>
-
-
-<div class="maintext" style='width:80%;display: block; margin-left: auto; margin-right: auto;'>
-
-   <h3> How it works </h3>
-
-   <p>
-       Our deep thesaurus ranks synonyms using an API call to a pretrained deep learning model. We use the model to encode entire sentences as vectors and then perform arithmetic on them in order to see how a given synonym changes the meaning of the sentence. The figure below gives an example and some details:
-   </p>
-
-   <div style="max-width: 80%; display: block; margin-left: auto; margin-right: auto;">
-     <img src="./static/deep-thesaurus.jpeg" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 100%; margin-top: 20px; margin-bottom: 20px">
-     <p><i>
-      Figure 1: We use our preliminary model to rank synonyms based on context. The goal is to obtain synonyms for the word “current.” This is a challenging task because the word’s meaning differs according to the sentence it is being used in. Starting from an unordered set of 36 synonyms -- some meant to replace “current” as in “contemporary” and others meant to replace “current” as in “the flow of something” -- we substitute “current” for each synonym and then use BERT to encode the resulting sentences. Then we use the cosine similarity between those sentence vectors and the original sentence vector to rank the synonyms. Intuitively, this ranking picks out the synonyms that change the meaning of the sentence the least, which are the synonyms that are most relevant to the user.
-     </i></p>
-   </div>
-
-   <p>
-       In the future, we'd like to expand our demo’s capabilities to include 1) grammar checking, 2) summarization and re-phrasing and 3) text style transfer. Our advantage over other tools, like Grammarly, is that we aim to build an elegant front-end API that can leverage whatever deep learning model is currently state-of-the-art in language modeling. If (and when) a much better NLP model is released, our writing tool will immediately improve in proportion to the quality of that model. So, in offloading the nuances of word sense disambiguation, grammar, and text summarization to research-grade text models, we can take advantage of the rapid pace of improvement of the field. One additional benefit is that these models are available in other languages, so adding multilingual support is as easy as swapping out pretrained models.
-   </p>
-
-   <p>
-       If you'd like to see this project grow and flourish, consider donating via Patreon. Should you support us on our journey, we hope that in a year’s time it will be easier for you and everyone else who uses this tool to find the words they need to say the things that matter.
-   </p>
 </div>
+
+
+<div class="maintext">
+
+  <h3> About us </h3>
+
+  <p>
+   We are a small team of friends who enjoy making cool things. We will be working on this whether it makes money or not. But if you donate, we can continue to host this website for free... and help you find the words you need to say the things that matter. 🥂
+  </p>
+
+    <form action="https://www.paypal.com/donate" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_donations" />
+    <input type="hidden" name="business" value="E3TN6JGLLUCU4" />
+    <input type="hidden" name="item_name" value="Supporting Deep Thesaurus and the Word Wumbo Team" />
+    <input type="hidden" name="currency_code" value="USD" />
+    <input type="submit" value="Donate" name="submit" title="PayPal link" alt="Donate button" />
+    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+    </form>
+    <img src="./static/footer.jpg" style="width: 300px;padding-top:50px; margin: auto;display: block;margin-left: auto;margin-right: auto;">
+</div>
+
 
 <div class="sechighlight">
 <div id="footer">
-Finished October 25, 2020
+  <p>Made with ❤️ by the Word Wumbo Team<br>
+  <i>Eric Frank, Xinyu Hu, and Sam Greydanus</i></p>
 </div>
 </div>
 </body>
