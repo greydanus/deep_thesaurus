@@ -12,7 +12,6 @@
   gtag('config', 'UA-72311215-7');
 </script>
 
-
 <!-- bootstrap -->
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="./static/js/bootstrap.min.js"></script>
@@ -31,104 +30,210 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 
 </head>
 <body>
-
-
-
-<h1>The Deep Thesaurus
-<!--     <img src="/static/books.png" alt="" style="max-width: 40px"> -->
-</h1>
-<h4 style='text-align:center; font-size: 15px'>By the Word Wumbo Team: Eric Frank, Xinyu Hu, and Sam Greydanus</h4>
-<img src="./static/wumbo.jpg" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 16%; min-width: 150px; max-width: 250px;border: 1px solid #333;">
-
-<br>
-
-<div class="sechighlight" style='width:80%;display: block; margin-left: auto; margin-right: auto;'>
-<div class="container sec">
-  <h2>Overview</h2>
-  <div id="coursedesc">
-    In the sentences "You are pretty great" and "You are pretty and great," the word pretty carries different meanings. Yet most standard thesauruses neglect to model this distinction, recommending a set of synonyms for the word regardless of context. This is a poor idea. It’s also penniless. Given modern language models, we can make substantial improvements over existing thesaurus APIs by taking sentence-level context into account. In particular, this can be done by using a natural language deep learning model (e.g. BERT [1], CTRL [2], or GPT-3 [3]) to <i>rank synonyms based on their context</i>.
+  <div class="navbar">
+    <h1 id="logo">Deep Thesaurus</h1>
   </div>
-</div>
-</div>
+  <!-- <div id="authors"> -->
+    <!-- <h4 id="authors">By the Word Wumbo Team: Eric Frank, Xinyu Hu, and Sam Greydanus</h4> -->
+  <!-- </div> -->
+  
+  <!-- <img src="./static/wumbo.jpg" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 16%; min-width: 150px; max-width: 250px;border: 1px solid #333;"> -->
 
-<div class="project_demo" style="display: block; margin-left: auto; margin-right: auto; width:600px">
-    <div style="text-align:left;">
-
-        <!-- <h4>Thesaurus demo:</h4> -->
-
-          <form id="form" action="" method="post">
-              <label for="sentence">Your sentence:</label>
-              <input type="text" id="sentence" name="sentence" size="50" value="You are pretty and great."><br>
-              <label for="word">Word to replace: </label>
-              <input type="text" id="word" size="10" name="word" value="pretty"><br>
-              <input type="button" id="submit" value="Go">
-          </form>
+  <br>
+  <div id="description">
+    <h1 style="font-size: 20px;">
+      A Thesaurus 
+      <span class="glitchtext"></span>
+      By Deep Learning
+      <!-- " a word to see suggested replacements" -->
+    </h1>
+  </div>
+<!-- 
+  <div class="sechighlight" style='width:80%;display: block; margin-left: auto; margin-right: auto;'>
+  <div class="container sec">
+    <h2>Overview</h2>
+    <div id="coursedesc">
+      In the sentences "You are pretty great" and "You are pretty and great," the word pretty carries different meanings. Yet most standard thesauruses neglect to model this distinction, recommending a set of synonyms for the word regardless of context. This is a poor idea. It’s also penniless. Given modern language models, we can make substantial improvements over existing thesaurus APIs by taking sentence-level context into account. In particular, this can be done by using a natural language deep learning model (e.g. BERT [1], CTRL [2], or GPT-3 [3]) to <i>rank synonyms based on their context</i>.
     </div>
-    <div style="text-align:left;">
-          <div style="margin-top: 10px;">
-            <p id="result"></p>
-          </div>
+  </div>
+  </div> -->
+
+  <div class="project_demo" style="display: block; margin-left: auto; margin-right: auto; width: 80%;">
+      <div style="text-align:left;">
+
+          <!-- <h4>Thesaurus demo:</h4> -->
+
+            <form id="form" action="" method="post">
+                <label for="sentence">Your sentence:</label>
+                <input type="text" id="sentence" name="sentence" size="50" value="You are pretty and great."><br>
+                <label for="word">Word to replace: </label>
+                <input type="text" id="word" size="10" name="word" value="pretty"><br>
+                <input type="button" id="submit" value="Go">
+            </form>
+      </div>
+      <div style="text-align:left;">
+            <div style="margin-top: 10px;">
+              <p id="result"></p>
+            </div>
+      </div>
+
+      <!-- <script>
+        function getSelectionText() {
+            var text = "";
+            if (window.getSelection) {
+                text = window.getSelection().toString();
+            } else if (document.selection && document.selection.type != "Control") {
+                text = document.selection.createRange().text;
+            }
+            return text;
+        }
+        document.onmouseup = document.onkeyup = document.onselectionchange = function() {
+          zz = getSelectionText();
+          sentence = document.getElementById("word").value
+          if(sentence.includes(zz)){
+            document.getElementById("word").value = zz;
+          }
+        };
+      </script> -->
+
+      <script>
+
+      $(document).ready(function(){
+          // click on button submit
+          $("#submit").on('click', function(){
+            document.getElementById("result").innerHTML = "Working...";
+            var data = {'text': $("#sentence").val(), 'word': $("#word").val()}
+            console.log(data)
+              // send ajax
+              $.ajax({
+                  url: 'https://eomtjgftm8.execute-api.us-east-1.amazonaws.com/wumbo', // url where to submit the request
+                  type : "POST", // type of action POST || GET
+                  dataType : 'json', // data type
+                  data : data,
+                  success : function(result) {
+                      // console.log(result);
+                      document.getElementById('result').innerHTML = result.join(', ');
+                  },
+                  error: function(xhr, resp, text) {
+                      document.getElementById("result").innerHTML = "Your request failed. Check your browser console for more information.";
+                      console.log(xhr, resp, text);
+                  }
+              })
+          });
+      });
+
+  </script>
+
+  </div>
+
+
+  <div class="maintext" style='width:80%;display: block; margin-left: auto; margin-right: auto;'>
+
+    <h3> How it works </h3>
+
+    <p>
+        Our deep thesaurus ranks synonyms using an API call to a pretrained deep learning model. We use the model to encode entire sentences as vectors and then perform arithmetic on them in order to see how a given synonym changes the meaning of the sentence. The figure below gives an example and some details:
+    </p>
+
+    <div style="max-width: 80%; display: block; margin-left: auto; margin-right: auto;">
+      <img src="./static/deep-thesaurus.jpeg" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 100%; margin-top: 20px; margin-bottom: 20px">
+      <p><i>
+        Figure 1: We use our preliminary model to rank synonyms based on context. The goal is to obtain synonyms for the word “current.” This is a challenging task because the word’s meaning differs according to the sentence it is being used in. Starting from an unordered set of 36 synonyms -- some meant to replace “current” as in “contemporary” and others meant to replace “current” as in “the flow of something” -- we substitute “current” for each synonym and then use BERT to encode the resulting sentences. Then we use the cosine similarity between those sentence vectors and the original sentence vector to rank the synonyms. Intuitively, this ranking picks out the synonyms that change the meaning of the sentence the least, which are the synonyms that are most relevant to the user.
+      </i></p>
     </div>
 
-    <script>
+    <p>
+        In the future, we'd like to expand our demo’s capabilities to include 1) grammar checking, 2) summarization and re-phrasing and 3) text style transfer. Our advantage over other tools, like Grammarly, is that we aim to build an elegant front-end API that can leverage whatever deep learning model is currently state-of-the-art in language modeling. If (and when) a much better NLP model is released, our writing tool will immediately improve in proportion to the quality of that model. So, in offloading the nuances of word sense disambiguation, grammar, and text summarization to research-grade text models, we can take advantage of the rapid pace of improvement of the field. One additional benefit is that these models are available in other languages, so adding multilingual support is as easy as swapping out pretrained models.
+    </p>
 
-    $(document).ready(function(){
-        // click on button submit
-        $("#submit").on('click', function(){
-          document.getElementById("result").innerHTML = "Working...";
-          var data = {'text': $("#sentence").val(), 'word': $("#word").val()}
-          console.log(data)
-            // send ajax
-            $.ajax({
-                url: 'https://eomtjgftm8.execute-api.us-east-1.amazonaws.com/wumbo', // url where to submit the request
-                type : "POST", // type of action POST || GET
-                dataType : 'json', // data type
-                data : data,
-                success : function(result) {
-                    // console.log(result);
-                    document.getElementById('result').innerHTML = result.join(', ');
-                },
-                error: function(xhr, resp, text) {
-                    document.getElementById("result").innerHTML = "Your request failed. Check your browser console for more information.";
-                    console.log(xhr, resp, text);
-                }
-            })
-        });
-    });
+    <p>
+        If you'd like to see this project grow and flourish, consider donating via Patreon. Should you support us on our journey, we hope that in a year’s time it will be easier for you and everyone else who uses this tool to find the words they need to say the things that matter.
+    </p>
+  </div>
 
-</script>
-
-</div>
-
-
-<div class="maintext" style='width:80%;display: block; margin-left: auto; margin-right: auto;'>
-
-   <h3> How it works </h3>
-
-   <p>
-       Our deep thesaurus ranks synonyms using an API call to a pretrained deep learning model. We use the model to encode entire sentences as vectors and then perform arithmetic on them in order to see how a given synonym changes the meaning of the sentence. The figure below gives an example and some details:
-   </p>
-
-   <div style="max-width: 80%; display: block; margin-left: auto; margin-right: auto;">
-     <img src="./static/deep-thesaurus.jpeg" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 100%; margin-top: 20px; margin-bottom: 20px">
-     <p><i>
-      Figure 1: We use our preliminary model to rank synonyms based on context. The goal is to obtain synonyms for the word “current.” This is a challenging task because the word’s meaning differs according to the sentence it is being used in. Starting from an unordered set of 36 synonyms -- some meant to replace “current” as in “contemporary” and others meant to replace “current” as in “the flow of something” -- we substitute “current” for each synonym and then use BERT to encode the resulting sentences. Then we use the cosine similarity between those sentence vectors and the original sentence vector to rank the synonyms. Intuitively, this ranking picks out the synonyms that change the meaning of the sentence the least, which are the synonyms that are most relevant to the user.
-     </i></p>
-   </div>
-
-   <p>
-       In the future, we'd like to expand our demo’s capabilities to include 1) grammar checking, 2) summarization and re-phrasing and 3) text style transfer. Our advantage over other tools, like Grammarly, is that we aim to build an elegant front-end API that can leverage whatever deep learning model is currently state-of-the-art in language modeling. If (and when) a much better NLP model is released, our writing tool will immediately improve in proportion to the quality of that model. So, in offloading the nuances of word sense disambiguation, grammar, and text summarization to research-grade text models, we can take advantage of the rapid pace of improvement of the field. One additional benefit is that these models are available in other languages, so adding multilingual support is as easy as swapping out pretrained models.
-   </p>
-
-   <p>
-       If you'd like to see this project grow and flourish, consider donating via Patreon. Should you support us on our journey, we hope that in a year’s time it will be easier for you and everyone else who uses this tool to find the words they need to say the things that matter.
-   </p>
-</div>
-
-<div class="sechighlight">
-<div id="footer">
-Finished October 25, 2020
-</div>
-</div>
+  <div class="sechighlight">
+  <div id="footer">
+  Finished October 25, 2020
+  <h4>By the Word Wumbo Team: Eric Frank, Xinyu Hu, and Sam Greydanus</h4>
+  </div>
+  </div>
+  <script>
+    class TextScramble {
+        constructor(el) {
+          this.el = el
+          this.chars = '!<>-_\\/[]{}—=+*^?#________'
+          this.update = this.update.bind(this)
+        }
+        setText(newText) {
+          // alert(this.)
+          const oldText = this.el.innerText
+          const length = Math.max(oldText.length, newText.length)
+          const promise = new Promise((resolve) => this.resolve = resolve)
+          this.queue = []
+          for (let i = 0; i < length; i++) {
+            const from = oldText[i] || ''
+            const to = newText[i] || ''
+            const start = Math.floor(Math.random() * 40)
+            const end = start + Math.floor(Math.random() * 40)
+            this.queue.push({ from, to, start, end })
+          }
+          cancelAnimationFrame(this.frameRequest)
+          this.frame = 0
+          this.update()
+          return promise
+        }
+        update() {
+          let output = ''
+          let complete = 0
+          for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i]
+            if (this.frame >= end) {
+              complete++
+              output += to
+            } else if (this.frame >= start) {
+              if (!char || Math.random() < 0.28) {
+                char = this.randomChar()
+                this.queue[i].char = char
+              }
+              output += `<span class="dud">${char}</span>`
+            } else {
+              output += from
+            }
+          }
+          this.el.innerHTML = output
+          if (complete === this.queue.length) {
+            this.resolve()
+          } else {
+            this.frameRequest = requestAnimationFrame(this.update)
+            this.frame++
+          }
+        }
+        randomChar() {
+          return this.chars[Math.floor(Math.random() * this.chars.length)]
+        }
+      }
+      
+      const phrases = [
+        'Supercharged',
+        'Beefed Up',
+        'Enhanced',
+        'Boosted'
+      ]
+      
+      const el = document.querySelector('.glitchtext')
+      const fx = new TextScramble(el)
+      
+      let counter = 0
+      const next = () => {
+        fx.setText(phrases[counter]).then(() => {
+          setTimeout(next, 2200)
+        })
+        counter = (counter + 1) % phrases.length
+      }
+      
+      next()
+    
+  </script>
+  
 </body>
 </html>
