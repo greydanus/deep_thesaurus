@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-72311215-7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-72311215-7');
+</script>
+
+
+<!-- bootstrap -->
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="./static/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="./static/bootstrap.min.css">
+<link rel="stylesheet" href="./static/bootstrap-theme.min.css">
+
+<!--math notation-->
+<script type="text/javascript" async
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!-- stylesheet -->
+<link rel="stylesheet" type="text/css" href="./static/style.css">
+<!-- import ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+
+
+<div class="titlesec">
+  <div style="display: inline-block;">
+    <h1 style="display: inline-block;">The Deep Thesaurus</h1>
+<!--     <div style="display: inline-block;text-align:right;margin: auto;margin-left: auto;margin-right: auto;"> -->
+    <div style="text-align: left;margin-left:20px;">
+      <a href="./index.html" style="color:black">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./how.html" style="color:black">How it works</a>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="maintext">
+
+  <h3> How it works </h3>
+
+   <!--  <img src="./static/thesaurus.jpg" alt="" style="display: block; margin-left: auto; margin-right: auto;width:20%; min-width: 250px; max-width: 500px;margin-top:15px;margin-bottom: 15px;"> -->
+
+   <p>
+       Our deep thesaurus ranks synonyms using an API call to a pretrained deep learning model. We use the model to encode entire sentences as vectors and then perform arithmetic on them in order to see how a given synonym changes the meaning of the sentence. The figure below gives an example and some details:
+   </p>
+
+   <div style="width: 85%;margin: auto;display: block;margin-left: auto; margin-right: auto;padding-bottom: 15px;padding-top: 15px;">
+      <img src="./static/deep-thesaurus.jpeg" style="width:100%;padding-bottom: 15px;">
+     <p><i>
+      Figure 1: We use our preliminary model to rank synonyms based on context. The goal is to obtain synonyms for the word “current.” This is a challenging task because the word’s meaning differs according to the sentence it is being used in. Starting from an unordered set of 36 synonyms -- some meant to replace “current” as in “contemporary” and others meant to replace “current” as in “the flow of something” -- we substitute “current” for each synonym and then use BERT to encode the resulting sentences. Then we use the cosine similarity between those sentence vectors and the original sentence vector to rank the synonyms. Intuitively, this ranking picks out the synonyms that change the meaning of the sentence the least, which are the synonyms that are most relevant to the user.
+     </i></p>
+   </div>
+
+   <p>
+       In the future, we'd like to expand our demo’s capabilities to include grammar checking, re-phrasing and text style transfer. Our advantage over other tools, like Grammarly, is that we aim to build an elegant front-end API that can leverage whatever deep learning model is currently state-of-the-art in language modeling. Whenever a better NLP model is released, our writing tool immediately improves in proportion to the quality of that model. So, in offloading the nuances of word sense disambiguation, grammar, and text summarization to research-grade text models, we can take advantage of the rapid pace of improvement of the field. One additional benefit is that these models are available in other languages, so adding multilingual support is as easy as swapping out pretrained models.
+   </p>
+   <img src="./static/footer.jpg" style="width: 300px;padding-top:50px; margin: auto;display: block;margin-left: auto;margin-right: auto;">
+</div>
+
+
+
+<div class="sechighlight">
+<div id="footer">
+  <p>Made with ❤️ by the Word Wumbo Team<br>
+  <i>Eric Frank, Xinyu Hu, and Sam Greydanus</i></p>
+</div>
+</div>
+</body>
+</html>
