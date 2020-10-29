@@ -1,141 +1,212 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72311215-7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-72311215-7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    gtag('config', 'UA-72311215-7');
+  </script>
 
-  gtag('config', 'UA-72311215-7');
-</script>
+  <!-- bootstrap -->
+  <script src="https://code.jquery.com/jquery-latest.js"></script>
+  <script src="./static/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="./static/bootstrap.min.css">
+  <link rel="stylesheet" href="./static/bootstrap-theme.min.css">
 
+  <!--math notation-->
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
 
-<!-- bootstrap -->
-<script src="https://code.jquery.com/jquery-latest.js"></script>
-<script src="./static/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="./static/bootstrap.min.css">
-<link rel="stylesheet" href="./static/bootstrap-theme.min.css">
+  <!-- stylesheet -->
+  <link rel="stylesheet" type="text/css" href="./static/style.css">
+  <!-- import ajax -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!--math notation-->
-<script type="text/javascript" async
-src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
-<!-- stylesheet -->
-<link rel="stylesheet" type="text/css" href="./static/style.css">
-<!-- import ajax -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-</head>
-<body>
-
-
-
-<div class="titlesec">
-  <div style="display: inline-block;">
-    <h1 style="display: inline-block;">The Deep Thesaurus</h1>
-<!--     <div style="display: inline-block;text-align:right;margin: auto;margin-left: auto;margin-right: auto;"> -->
-    <div style="text-align: left;margin-left:20px;">
-      <a href="./index.html" style="color:black">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./how.html" style="color:black">How it works</a>
+  </head>
+  <body>
+    <div class="titlesec">
+      <div style="display: inline-block;">
+        <h1 style="display: inline-block;">
+          The <span class="glitchtext">Deep</span> Thesaurus
+        </h1>
+        <div style="text-align: left;margin-left:20px;">
+          <a href="./index.html" style="color:black">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./how.html" style="color:black">How it works</a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<br>
+    <br>
 
-<div class="overviewsec">
-  <h3>Overview</h3>
-  <div id="overview">
-    <p>
-      In the sentences "You are pretty great" and "You are pretty and great," the word <i>pretty</i> carries different meanings. Yet most standard thesauruses neglect to model this distinction, recommending a set of synonyms for the word regardless of context. This is a poor idea. It’s also penniless. Given modern language models, we can make substantial improvements over existing thesaurus APIs by taking sentence-level context into account. In particular, this can be done by using a natural language deep learning model such as BERT or GPT-3 to <i>rank synonyms based on their context</i>.
-    </p>
-  </div>
-</div>
-
-<div class="overviewsec">
-<h3>Try it out</h3>
-  <p>
-    Use your word in a sentence and hit "go."
-  </p>
-<div class="demo">
-    <div style="text-align:left;">
-
-        <!-- <h4>Thesaurus demo:</h4> -->
-
-          <form id="form" action="" method="post">
-              <label for="sentence">Your sentence:</label>
-              <input type="text" id="sentence" name="sentence" size="50" value="You are pretty and great."><br>
-              <label for="word">Word to replace: </label>
-              <input type="text" id="word" size="10" name="word" value="pretty"><br>
-              <input type="button" id="submit" value="Go">
-          </form>
+    <div class="overviewsec">
+      <h3>Overview</h3>
+      <div id="overview">
+        <p>
+          In the sentences "You are pretty great" and "You are pretty and great," the word <i>pretty</i> carries different meanings. Yet most standard thesauruses neglect to model this distinction, recommending a set of synonyms for the word regardless of context. This is a poor idea. It’s also penniless. Given modern language models, we can make substantial improvements over existing thesaurus APIs by taking sentence-level context into account. In particular, this can be done by using a natural language deep learning model such as BERT or GPT-3 to <i>rank synonyms based on their context</i>.
+        </p>
+      </div>
     </div>
-    <div style="text-align:left;">
+
+    <div class="overviewsec">
+      <h3>Try it out</h3>
+      <p>
+        Use your word in a sentence and hit "go."
+      </p>
+      <div class="demo">
+        <div style="text-align:left;">
+
+            <!-- <h4>Thesaurus demo:</h4> -->
+
+              <form id="form" action="" method="post">
+                  <label for="sentence">Your sentence:</label>
+                  <input type="text" id="sentence" name="sentence" size="50" value="You are pretty and great."><br>
+                  <label for="word">Word to replace: </label>
+                  <input type="text" id="word" size="10" name="word" value="pretty"><br>
+                  <input type="button" id="submit" value="Go">
+              </form>
+        </div>
+        <div style="text-align:left;">
           <div style="margin-top: 10px;">
             <p id="result"></p>
           </div>
+        </div>
+      </div>
+      <script>
+        $(document).ready(function(){
+            // click on button submit
+            $("#submit").on('click', function(){
+              document.getElementById("result").innerHTML = "Working...";
+              var data = {'text': $("#sentence").val(), 'word': $("#word").val()}
+              console.log(data)
+                // send ajax
+                $.ajax({
+                    url: 'https://eomtjgftm8.execute-api.us-east-1.amazonaws.com/wumbo', // url where to submit the request
+                    type : "POST", // type of action POST || GET
+                    dataType : 'json', // data type
+                    data : data,
+                    success : function(result) {
+                        // console.log(result);
+                        document.getElementById('result').innerHTML = result.join(', ');
+                    },
+                    error: function(xhr, resp, text) {
+                        document.getElementById("result").innerHTML = "Your request failed. Check your browser console for more information.";
+                        console.log(xhr, resp, text);
+                    }
+                })
+            });
+        });
+      </script>
     </div>
 
+
+    <div class="maintext">
+
+      <h3> About us </h3>
+
+      <p>
+      We are a small team of friends who enjoy making cool things. We will be working on this whether it makes money or not. But if you donate, we can continue to host this website for free... and help you find the words you need to say the things that matter. 🥂
+      </p>
+
+      <form action="https://www.paypal.com/donate" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_donations" />
+        <input type="hidden" name="business" value="E3TN6JGLLUCU4" />
+        <input type="hidden" name="item_name" value="Supporting Deep Thesaurus and the Word Wumbo Team" />
+        <input type="hidden" name="currency_code" value="USD" />
+        <input type="submit" value="Donate" name="submit" title="PayPal link" alt="Donate button" />
+        <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+      </form>
+      <img src="./static/footer.jpg" style="width: 300px;padding-top:50px; margin: auto;display: block;margin-left: auto;margin-right: auto;">
+    </div>
+
+
+    <div class="sechighlight">
+      <div id="footer">
+        <p>Made with ❤️ by the Word Wumbo Team
+          <br>
+          <i>Eric Frank, Xinyu Hu, and Sam Greydanus</i>
+        </p>
+      </div>
+    </div>
     <script>
-
-    $(document).ready(function(){
-        // click on button submit
-        $("#submit").on('click', function(){
-          document.getElementById("result").innerHTML = "Working...";
-          var data = {'text': $("#sentence").val(), 'word': $("#word").val()}
-          console.log(data)
-            // send ajax
-            $.ajax({
-                url: 'https://eomtjgftm8.execute-api.us-east-1.amazonaws.com/wumbo', // url where to submit the request
-                type : "POST", // type of action POST || GET
-                dataType : 'json', // data type
-                data : data,
-                success : function(result) {
-                    // console.log(result);
-                    document.getElementById('result').innerHTML = result.join(', ');
-                },
-                error: function(xhr, resp, text) {
-                    document.getElementById("result").innerHTML = "Your request failed. Check your browser console for more information.";
-                    console.log(xhr, resp, text);
+      class TextScramble {
+          constructor(el) {
+            this.el = el
+            this.chars = '!<>-_\\/[]{}—=+*^?#________'
+            this.update = this.update.bind(this)
+          }
+          setText(newText) {
+            // alert(this.)
+            const oldText = this.el.innerText
+            const length = Math.max(oldText.length, newText.length)
+            const promise = new Promise((resolve) => this.resolve = resolve)
+            this.queue = []
+            for (let i = 0; i < length; i++) {
+              const from = oldText[i] || ''
+              const to = newText[i] || ''
+              const start = Math.floor(Math.random() * 40)
+              const end = start + Math.floor(Math.random() * 40)
+              this.queue.push({ from, to, start, end })
+            }
+            cancelAnimationFrame(this.frameRequest)
+            this.frame = 0
+            this.update()
+            return promise
+          }
+          update() {
+            let output = ''
+            let complete = 0
+            for (let i = 0, n = this.queue.length; i < n; i++) {
+              let { from, to, start, end, char } = this.queue[i]
+              if (this.frame >= end) {
+                complete++
+                output += to
+              } else if (this.frame >= start) {
+                if (!char || Math.random() < 0.28) {
+                  char = this.randomChar()
+                  this.queue[i].char = char
                 }
-            })
-        });
-    });
+                output += `<span class="dud">${char}</span>`
+              } else {
+                output += from
+              }
+            }
+            this.el.innerHTML = output
+            if (complete === this.queue.length) {
+              this.resolve()
+            } else {
+              this.frameRequest = requestAnimationFrame(this.update)
+              this.frame++
+            }
+          }
+          randomChar() {
+            return this.chars[Math.floor(Math.random() * this.chars.length)]
+          }
+        }
+        
+        const phrases = [
+          'Deep',
+          'Intelligent',
+          'Friendly',
+          'AI',
+          'Smart',
+        ]
+        
+        const el = document.querySelector('.glitchtext')
+        const fx = new TextScramble(el)
+        
+        let counter = 0
+        const next = () => {
+          fx.setText(phrases[counter])
+          counter = (counter + 1) % phrases.length
+        }
+        
+        el.addEventListener("mouseover", next)
+      
+    </script>
 
-</script>
-
-</div>
-</div>
-
-
-<div class="maintext">
-
-  <h3> About us </h3>
-
-  <p>
-   We are a small team of friends who enjoy making cool things. We will be working on this whether it makes money or not. But if you donate, we can continue to host this website for free... and help you find the words you need to say the things that matter. 🥂
-  </p>
-
-    <form action="https://www.paypal.com/donate" method="post" target="_top">
-    <input type="hidden" name="cmd" value="_donations" />
-    <input type="hidden" name="business" value="E3TN6JGLLUCU4" />
-    <input type="hidden" name="item_name" value="Supporting Deep Thesaurus and the Word Wumbo Team" />
-    <input type="hidden" name="currency_code" value="USD" />
-    <input type="submit" value="Donate" name="submit" title="PayPal link" alt="Donate button" />
-    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-    </form>
-    <img src="./static/footer.jpg" style="width: 300px;padding-top:50px; margin: auto;display: block;margin-left: auto;margin-right: auto;">
-</div>
-
-
-<div class="sechighlight">
-<div id="footer">
-  <p>Made with ❤️ by the Word Wumbo Team<br>
-  <i>Eric Frank, Xinyu Hu, and Sam Greydanus</i></p>
-</div>
-</div>
-</body>
+  </body>
 </html>
