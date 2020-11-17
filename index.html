@@ -45,8 +45,7 @@
     <div class="overviewsec">
       <h3>Overview</h3>
       <div id="overview">
-        <p>
-          In the sentences "You are pretty great" and "You are pretty and great," the word <i>pretty</i> carries different meanings. Yet most standard thesauruses neglect to model this distinction, recommending a set of synonyms for the word regardless of context. This is a poor idea. It’s also penniless. Given modern language models, we can make substantial improvements over existing thesaurus APIs by taking sentence-level context into account. In particular, this can be done by using a natural language deep learning model such as BERT or GPT-3 to <i>rank synonyms based on their context</i>.
+        <p> In the sentences <span style="background-color:#DCDCDC">  You are <b>pretty</b> great</span> and <span style="background-color:#DCDCDC"> You are <b>pretty</b> and great</span>, the word <b>pretty</b> carries different meanings. Yet most standard thesauruses neglect to model this distinction, recommending a set of synonyms for the word regardless of context. This is a poor idea. It’s also penniless. Given modern language models, we can make substantial improvements over existing thesaurus APIs by taking sentence-level context into account. In particular, this can be done by using a natural language deep learning model such as BERT or GPT-3 to <i>rank synonyms based on their context</i>.
         </p>
       </div>
     </div>
@@ -135,7 +134,7 @@
       class TextScramble {
           constructor(el) {
             this.el = el
-            this.chars = '!<>-_\\/[]{}—=+*^?#________'
+            this.chars = ' '
             this.update = this.update.bind(this)
           }
           setText(newText) {
@@ -147,8 +146,8 @@
             for (let i = 0; i < length; i++) {
               const from = oldText[i] || ''
               const to = newText[i] || ''
-              const start = Math.floor(Math.random() * 40)
-              const end = start + Math.floor(Math.random() * 40)
+              const start = Math.floor(Math.random() * 20)
+              const end = start + Math.floor(Math.random() * 20)
               this.queue.push({ from, to, start, end })
             }
             cancelAnimationFrame(this.frameRequest)
@@ -186,7 +185,7 @@
             return this.chars[Math.floor(Math.random() * this.chars.length)]
           }
         }
-        
+
         const phrases = [
           'Deep',
           'Intelligent',
@@ -194,18 +193,18 @@
           'AI',
           'Smart',
         ]
-        
+
         const el = document.querySelector('.glitchtext')
         const fx = new TextScramble(el)
-        
+
         let counter = 0
         const next = () => {
           fx.setText(phrases[counter])
           counter = (counter + 1) % phrases.length
         }
-        
+
         el.addEventListener("mouseover", next)
-      
+
     </script>
 
   </body>
